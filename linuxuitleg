@@ -1,10 +1,10 @@
-su
+sudo vi /etc/samba/smb.conf
 
-ip a
+[naam]
+path = /home/smbnaam
+writeable - yes
+comment = "Shared map"
 
-zypper search samba
+create mask = 0660
+directory mask = 0750
 
-sudo install samba()
-
-systemctl status smb.service
-systemctl status nmb.service
