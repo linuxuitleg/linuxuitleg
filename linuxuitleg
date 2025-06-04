@@ -1,0 +1,10 @@
+su
+
+ip a
+
+zypper search samba
+
+sudo install samba()
+
+systemctl status smb.service
+systemctl status nmb.service
