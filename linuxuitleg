@@ -1,10 +1,57 @@
-sudo vi /etc/samba/smb.conf
+Linux () = iets invullen, [] = uitleg/extra. 
+	1.	Su 
+	2.	Zypper search (applicatie) [zoals samba]
+	3.	Zypper install (applicatie) [zoals samba]
+	4.	Systemctl status smb.service 
+	5.	Systemctl status nmb.service
+	6.	systemctl start smb.service 
+	7.	Systemctl start nmb.service
+	8.	Systemctl enable smb.service 
+	9.	Systemctl enable nmb.service
+	10.	Systemctl status firewalld.service 
+	11.	Systemctl stop firewalld.service
+	12.	Systemctl disable firewalld.service
+	13.	Groupadd (groupname) 
+	14.	Useradd -m (name) [geen hoofdletters,  geen spatie, rare tekens.]
+	15.	Usermod -g [-g is alleen 1 groep and rest verwijderen] [of -aG voor alleen toevoegen van een group](groupname) (username) 
+	16.	id (username) 
+	17.	Passwd (username) 
+	18.	Smbpasswd -a (Linux username) 
+	19.	Cd/home [plek om share map te maken als plek niet is aangegeven]
+	20.	mkdir (map naam) 
+	21.	Chgroup (map naam) (group) 
+	22.	Chmod g+w [g+w is lezen en schrijven] (map naam) 
+	23.	Setfacl -m g:directie:r-x [directie is op de plaats van de group naam, als voorbeeld staat directie er, rwx rechten] (map naam) 
+	24.	Getfacl (groupname)
+	25.	Cd /etc/samba 
+	26.	Vi smb.conf
+	27.	Systemctl restart smb.service [altijd restart zekerheid] 
 
-[naam]
-path = /home/smbnaam
-writeable - yes
-comment = "Shared map"
+Standaard mask
+Create mask = 0664 
+Directory mask = 0775
 
-create mask = 0660
-directory mask = 0750
+[(naam)] 
+Tab alles:
+comment = [uitleg van share]
+path = (plek waar de map is)
+writeable = yes
+browseable = yes
+valid users = (de user of @(group naam) die wat mogen doen)
+write list = (user of group dat mag schrijven en lezen)
+read list = (user of group dat mag lezen) 
+create mask = 0664
+directory mask = 0775
 
+Checks 
+	1.	Ip add [Linux]
+	2.	Windows, bestanden, connectie maken, aanvinken: Verbinding maken met andere referenties. 
+	3.	\\(ip add)\(share naam) 
+
+Backup home map
+Vi (naam bestand) 
+rsync -a /home/* / tmp/back [in de map en opslaan]
+Cd /tmp
+mkdir back
+Crontab -e [! Maak foto dat je deze hebt getypt]
+Chmod +x (bestand naam)
